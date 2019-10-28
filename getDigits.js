@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
-const persephonySDK = require('@persephony/sdk')
+const freeclimbSDK = require('@freeclimb/sdk')
 
 const app = express()
 app.use(bodyParser.json())
@@ -9,31 +9,31 @@ const port = process.env.PORT || 3000
 // Where your app is hosted ex. www.myapp.com
 const host = process.env.HOST
 
-const persephony = persephonySDK()
+const freeclimb = freeclimbSDK()
 // Handles incoming calls
 app.post('/incomingCall', (req, res) => {
   // Create PerCL say script
-  const greeting = persephony.percl.say('Hello')
+  const greeting = freeclimb.percl.say('Hello')
   // Create PerCL say script
-  const greetingPause = persephony.percl.pause(100)
+  const greetingPause = freeclimb.percl.pause(100)
   // Create PerCL say script
-  const promptForColor = persephony.percl.say('Please select a color. Enter one for green, two for red, and three for blue.')
+  const promptForColor = freeclimb.percl.say('Please select a color. Enter one for green, two for red, and three for blue.')
   // Create options for getDigits script
   const options = {
-    prompts: persephony.percl.build(promptForColor),
+    prompts: freeclimb.percl.build(promptForColor),
     maxDigits: 1,
     minDigits: 1,
     flushBuffer: true
   }
   // Create PerCL for getDigits script
-  const getDigits = persephony.percl.getDigits(`${host}/colorSelectionDone`, options)
+  const getDigits = freeclimb.percl.getDigits(`${host}/colorSelectionDone`, options)
   // Build and respond with Percl script
-  const percl = persephony.percl.build(greeting, greetingPause, getDigits)
+  const percl = freeclimb.percl.build(greeting, greetingPause, getDigits)
   res.status(200).json(percl)
 })
 
 app.post('/colorSelectionDone', (req, res) => {
-  // Get Persephony response
+  // Get freeclimb response
   const getDigitResponse = req.body
   // Get the digits the user entered
   const digits = getDigitResponse.digits
@@ -46,11 +46,11 @@ app.post('/colorSelectionDone', (req, res) => {
     }
     const color = colors[digits]
     let sayResponse = color ? `You selected ${color}` : 'you did not select a number between 1 and 3'
-    let say = persephony.percl.say(sayResponse)
+    let say = freeclimb.percl.say(sayResponse)
     // Create PerCL hangup script
-    const hangup = persephony.percl.hangup()
+    const hangup = freeclimb.percl.hangup()
     // Build PerCL script
-    const percl = persephony.percl.build(say, hangup)
+    const percl = freeclimb.percl.build(say, hangup)
     // Repsond with PerCL scripts
     res.status(200).json(percl)
   }
