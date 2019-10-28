@@ -5,7 +5,7 @@ const freeclimbSDK = require('@freeclimb/sdk')
 
 const app = express()
 app.use(bodyParser.json())
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 80
 // Where your app is hosted ex. www.myapp.com
 const host = process.env.HOST
 
