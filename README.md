@@ -1,4 +1,4 @@
-# Node - Get Digits Tutorial
+# Node - Collect Digits Tutorial
 
 This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/collect-digits-1#section-javascript). Specifically, the project will:
 
