@@ -1,6 +1,6 @@
 # Node - Collect Digits Tutorial
 
-This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/collect-digits-1#section-javascript). Specifically, the project will:
+This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/collect-digits-1#section-nodejs). Specifically, the project will:
 
 - Get digits typed by the caller
 - User their response to respond with the selection   
